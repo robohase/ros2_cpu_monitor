@@ -1,4 +1,6 @@
 from setuptools import setup
+import os
+from glob import glob
 
 package_name = 'temperature_tracker'
 
@@ -10,13 +12,18 @@ setup(
         ('share/ament_index/resource_index/packages',
             ['resource/' + package_name]),
         ('share/' + package_name, ['package.xml']),
+        (os.path.join('share', package_name, 'launch'), glob('launch/*.launch.py')),
+        (os.path.join('share', package_name, 'params'), glob('params/*.yaml')),
     ],
-    install_requires=['setuptools'],
+    install_requires=[
+        'setuptools',
+        'gputil',
+    ],    
     zip_safe=True,
     maintainer='colin',
-    maintainer_email='colin.fuelberth@icloud.com',
-    description='TODO: Package description',
-    license='TODO: License declaration',
+    maintainer_email='robohase01@gmail.com',
+    description='temperature tracker for ros2',
+    license='MIT',
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
